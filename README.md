@@ -4,8 +4,8 @@ Cantina Simples foi um projeto desenvolvido como trabalho de conclusão de curso
 
 ## Autores
 
-Bruno Sanches (bysanches@gmail.com)
-Dionisio Leonardo (dtleonardo@hotmail.com)
+- Bruno Sanches (bysanches@gmail.com)
+- Dionisio Leonardo (dtleonardo@hotmail.com)
 
 ## Como instalar
 
