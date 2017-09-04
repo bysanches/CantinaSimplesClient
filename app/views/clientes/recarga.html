@@ -1,0 +1,42 @@
+
+<md-card>
+    <form name="form" novalidate ng-submit="form.$valid && ctrl.salvar()">
+        <div layout-padding>
+            <h1>Recarga de saldo</h1>
+            
+            <md-autocomplete required name="cliente"
+                             md-selected-item="ctrl.model.cliente"
+                             md-autoselect="true"
+                             md-no-cache="true"
+                             md-search-text="ctrl.searchText"
+                             md-items="cliente in ctrl.queryClientes(ctrl.searchText)"
+                             md-item-text="cliente.nome + ' - ' + cliente.documento"
+                             md-selected-item-change="ctrl.clienteChange(cliente)"
+                             md-min-length="0"
+                             placeholder="Selecione o cliente">
+                <md-item-template>
+                    <span md-highlight-text="ctrl.searchTextCliente" md-highlight-flags="^i">
+                        {{ cliente.nome + ' - ' + cliente.documento }}
+                    </span>
+                </md-item-template>
+                <ng-messages for="form.cliente.$error" ng-show="form.cliente.$submitted || form.cliente.$touched" role="alert">
+                    <ng-message when="required">Informe o cliente.</ng-message>
+                </ng-messages>
+            </md-autocomplete>
+            
+            <md-input-container>
+                <label>Valor</label>
+                <input name="valor" type="number" min="0.01" step="0.01" required ng-model="ctrl.model.valor">
+                <ng-messages for="form.valor.$error" ng-show="form.valor.$submitted || form.valor.$touched" role="alert">
+                    <ng-message when="required">Informe o valor.</ng-message>
+                    <ng-message when="number">Valor inválido.</ng-message>
+                    <ng-message when="min">O valor deve ser maior que zero.</ng-message>
+                </ng-messages>
+            </md-input-container>
+        </div>
+        
+        <div layout-padding>
+            <md-button class="md-raised md-primary" type="submit">Salvar</md-button>
+        </div>
+    </form>
+</md-card>

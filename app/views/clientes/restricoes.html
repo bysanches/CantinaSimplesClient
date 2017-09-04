@@ -1,0 +1,42 @@
+
+<form>
+    <div layout-padding>
+        <h1>Restrições</h1>
+        
+        <md-autocomplete required name="cliente"
+                            md-selected-item="ctrl.cliente"
+                            md-autoselect="true"
+                            md-no-cache="true"
+                            md-search-text="ctrl.searchText"
+                            md-items="cliente in ctrl.queryClientes(ctrl.searchText)"
+                            md-item-text="cliente.nome + ' - ' + cliente.documento"
+                            md-selected-item-change="ctrl.clienteChange(cliente)"
+                            md-min-length="0"
+                            placeholder="Selecione o cliente">
+            <md-item-template>
+                <span md-highlight-text="ctrl.searchTextCliente" md-highlight-flags="^i">
+                    {{ cliente.nome + ' - ' + cliente.documento }}
+                </span>
+            </md-item-template>
+            <ng-messages for="form.cliente.$error" ng-show="form.cliente.$submitted || form.cliente.$touched" role="alert">
+                <ng-message when="required">Informe o cliente.</ng-message>
+            </ng-messages>
+        </md-autocomplete>
+        
+        <md-list ng-if="ctrl.produtos">
+            <md-subheader class="md-no-sticky">{{ ctrl.plural(ctrl.produtos.length, 'produto', 'produtos') }}</md-subheader>
+            
+            <md-list-item class="md-3-line" ng-repeat="item in ctrl.produtos">
+                <div class="md-list-item-text">
+                    <h3>{{ item.nome }}</h3>
+                    <h4>{{ item.preco | currency }}</h4>
+                    <p>{{ item.descricao }}</p>
+                </div>
+                <md-checkbox class="md-secondary"
+                             ng-if="ctrl.cliente != null"
+                             ng-checked="ctrl.exists(item.id, ctrl.cliente.restricoes)"
+                             ng-click="ctrl.toggle(item.id, ctrl.cliente.restricoes)"></md-checkbox>
+            </md-list-item>
+        </md-list>
+    </div>
+</form>

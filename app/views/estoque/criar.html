@@ -1,0 +1,41 @@
+
+<form name="form" novalidate ng-submit="form.$valid && ctrl.salvar()">
+    <h1>Novo movimento de estoque</h1>
+    
+    <div class="md-padding">
+        <md-autocomplete md-input-name="produto"
+                        md-selected-item="ctrl.model.produto"
+                        md-autoselect="true"
+                        md-no-cache="true"
+                        md-search-text="ctrl.searchText"
+                        md-items="produto in ctrl.query(ctrl.searchText)"
+                        md-item-text="produto.nome"
+                        md-selected-item-change="ctrl.produtoChange(produto)"
+                        md-min-length="0"
+                        md-floating-label="Selecione o produto"
+                        required>
+            <md-item-template>
+                <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{ produto.nome }}</span>
+            </md-item-template>
+            <ng-messages for="form.produto.$error" ng-show="form.$submitted || form.produto.$touched" role="alert">
+                <ng-message when="required">O produto é obrigatório.</ng-message>
+            </ng-messages>
+        </md-autocomplete>
+        
+        <md-input-container>
+            <label>Quantidade</label>
+            <input name="quantidade" type="number" required ng-model="ctrl.model.quantidade">
+            <ng-messages for="form.quantidade.$error" ng-show="form.$submitted || form.quantidade.$touched" role="alert">
+                <ng-message when="required">Informe a quantidade.</ng-message>
+                <ng-message when="number">Valor inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+    </div>
+    
+    <ul style="color: red;">
+        <li ng-repeat="erro in ctrl.erros">{{ erro }}</li>
+    </ul>
+    
+    <md-button type="submit" class="md-raised md-primary">Salvar</md-button>
+    
+</form>

@@ -1,0 +1,8 @@
+baixar fontes no svn
+instalar node 4.2 e npm 2.14
+instalar git
+npm install -g yo grunt-cli gulp tsc tsd bower
+npm install
+bower install
+tsd install
+grunt serve

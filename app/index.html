@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <title>Cantina Simples</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="styles/fontes/roboto/roboto.css">
+    <link rel="stylesheet" href="styles/fontes/material-icons/icon.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/md-table.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="cantinaSimplesClienteApp" ng-cloak>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    
+      
+    <div ng-controller="AppCtrl" layout="column" style="height: 100%;">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" aria-label="Menu" ng-click="toggleLeft()" ng-show="auth.isAuth">
+            <md-icon>menu</md-icon>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="Cantina Simples">
+            <md-icon md-svg-icon="images/logo-cantina-simples.svg" class="logo"></md-icon>
+          </md-button>
+          <h1><a href="#/">Cantina Simples</a></h1>
+          <span flex></span>
+          <span ng-if="auth.isAuth" hide-sm>{{ auth.nome }}</span>
+          
+          <md-menu ng-if="auth.isAuth">
+            <md-button class="md-icon-button" aria-label="opções do usuário"
+                       ng-click="$mdOpenMenu($event)">
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item>
+                <md-button ng-href="#/trocarsenha">
+                  <md-icon md-menu-align-target>edit</md-icon>
+                  Trocar senha
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="logoff()">
+                  <md-icon md-menu-align-target>close</md-icon>
+                  Sair
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </md-toolbar>
+      <section layout="row" flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+          <md-content layout-padding>
+            <md-icon md-svg-icon="images/logo-cantina-simples.svg" class="logo-grande"></md-icon>
+            <md-list>
+              <md-list-item ng-repeat="menu in menusByRole(auth.role)" ng-click="close(menu.path)">
+                  <md-icon>{{ menu.icon }}</md-icon>
+                  <p>{{ menu.label }}</p>
+              </md-list-item>
+            </md-list>
+          </md-content>
+        </md-sidenav>
+        <md-content flex layout-padding>
+          <div ng-view block-ui block-ui-pattern="/^\/api\/.*$/"></div>
+        </md-content>
+      </section>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-mask/dist/ngMask.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+    <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    
+    <script src="bower_components/angular-i18n/angular-locale_pt-br.js"></script>
+    <script src="bower_components/moment/locale/pt-br.js"></script>
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="target/out.js"></script>
+        <!-- endbuild -->
+        
+    <script src="config.js"></script>
+</body>
+</html>

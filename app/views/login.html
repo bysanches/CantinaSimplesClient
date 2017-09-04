@@ -1,0 +1,27 @@
+<md-content class="md-padding">
+    <md-card style="max-width: 600px; margin: auto;color: #3F51B5 !important;">
+        <md-icon md-svg-src="../images/logo-cantina-simples.svg" style="margin: auto; color: #3F51B5 !important; width: 100px; height: 100px;">
+        </md-icon>
+        <md-card-content>
+            <form name="login" novalidate ng-submit="login.$valid && ctrl.logar()">
+                <md-input-container class="md-block">
+                    <label>E-mail</label>
+                    <input name="email" type="email" ng-model="ctrl.model.userName" required>
+                    <ng-messages for="login.email.$error" ng-show="login.$submitted || login.email.$touched" role="alert">
+                        <ng-message when="required">Informe o e-mail.</ng-message>
+                        <ng-message when="email">Endereço de e-mail inválido.</ng-message>
+                    </ng-messages>
+                </md-input-container>
+                
+                <md-input-container class="md-block">
+                    <label>Senha</label>
+                    <input name="senha" type="password" ng-model="ctrl.model.password" required>
+                    <ng-messages for="login.senha.$error" ng-show="login.$submitted || login.senha.$touched" role="alert">
+                        <ng-message when="required">Informe a senha.</ng-message>
+                    </ng-messages>
+                </md-input-container>
+                <md-button class="md-raised md-primary">Entrar</md-button>
+            </form>
+        </md-card-content>
+    </md-card>
+</md-content>

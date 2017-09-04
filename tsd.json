@@ -1,0 +1,39 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "jquery/jquery.d.ts": {
+      "commit": "3191f6e0088eee07c4d8fd24e4d27a40a60d9eb9"
+    },
+    "angularjs/angular.d.ts": {
+      "commit": "3191f6e0088eee07c4d8fd24e4d27a40a60d9eb9"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+    },
+    "angular-material/angular-material.d.ts": {
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "7f07bd88d1083e995a0dae317a333c9641320cc8"
+    },
+    "jasmine/jasmine.d.ts": {
+      "commit": "7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
+    },
+    "angularjs/angular-mocks.d.ts": {
+      "commit": "7a3ca1f0b8a0960af9fc1838f3234cc9d6ce0645"
+    },
+    "angular-local-storage/angular-local-storage.d.ts": {
+      "commit": "3191f6e0088eee07c4d8fd24e4d27a40a60d9eb9"
+    },
+    "moment/moment.d.ts": {
+      "commit": "eb59a40d3c2f3257e34ec2ede181046230814a41"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "eb59a40d3c2f3257e34ec2ede181046230814a41"
+    }
+  }
+}

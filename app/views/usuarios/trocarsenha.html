@@ -1,0 +1,31 @@
+<md-card layout-padding>
+    <h2>Trocar senha</h2>
+    <form name="form" novalidate ng-submit="form.$valid && ctrl.trocarSenha()">
+        <md-input-container class="md-block">
+            <label>Senha atual</label>
+            <input name="senhaAtual" type="password" ng-model="ctrl.model.senhaAtual" required>
+            <ng-messages for="form.senhaAtual.$error" ng-show="form.$submitted || form.senhaAtual.$touched" role="alert">
+                <ng-message when="required">Informe a senha atual.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Nova senha</label>
+            <input name="novaSenha" type="password" ng-model="ctrl.model.novaSenha" required>
+            <ng-messages for="form.novaSenha.$error" ng-show="form.$submitted || form.novaSenha.$touched" role="alert">
+                <ng-message when="required">Informe a nova senha.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirmação da senha</label>
+            <input name="confirmacaoSenha" type="password" ng-model="ctrl.model.confirmacaoSenha" required>
+            <ng-messages for="form.confirmacaoSenha.$error" ng-show="form.$submitted || form.confirmacaoSenha.$touched" role="alert">
+                <ng-message when="required">Confirme a nova senha.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <ul style="color: red;">
+            <li ng-repeat="erro in ctrl.erros">{{ erro }}</li>
+        </ul>
+        
+        <md-button type="submit" class="md-raised md-primary">Trocar senha</md-button>
+    </form>
+</md-card>

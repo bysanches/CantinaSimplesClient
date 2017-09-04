@@ -1,0 +1,48 @@
+<md-content>
+	<md-card layout-padding>
+		<div layout>
+			<md-input-container>
+				<label>Nome contendo</label>
+				<input ng-model="listCtrl.filtro.nome">
+			</md-input-container>
+		</div>
+		<div layout>
+			<md-button class="md-raised" ng-click="listCtrl.buscar()">Buscar</md-button>
+		</div>
+	</md-card>
+</md-content>
+
+<md-content ng-cloak>
+	<h1>Produtos</h1>
+
+	<div ng-controller="LocalPaginationController as paginationCtrl">
+		<md-list>
+			<md-subheader class="md-no-sticky">{{ listCtrl.plural(listCtrl.items.length, 'produto', 'produtos') }}</md-subheader>
+
+			<md-list-item class="md-3-line" ng-repeat="item in paginationCtrl.pagedResult(listCtrl.items)">
+				<div class="md-list-item-text">
+					<h3>{{ item.nome }}</h3>
+					<h4>{{ item.preco | currency }} ({{ item.saldo }} em estoque)</h4>
+					<p>{{ item.descricao }}</p>
+				</div>
+				<md-button class="md-icon-button" ng-click="listCtrl.goToProduto(item)" aria-label="editar">
+					<md-icon class="material-icons md-18">mode_edit</md-icon>
+					<md-tooltip>editar</md-tooltip>
+				</md-button>
+				<md-button class="md-icon-button" ng-click="listCtrl.excluir(item)" aria-label="excluir">
+					<md-icon class="material-icons md-18">delete</md-icon>
+					<md-tooltip>excluir</md-tooltip>
+				</md-button>
+				<md-divider></md-divider>
+			</md-list-item>
+		</md-list>
+
+		<div>
+			<md-button class="md-default md-raised" ng-disabled="!paginationCtrl.hasPreviousPage()" ng-click="paginationCtrl.previousPage()">Anterior</md-button>
+			{{ paginationCtrl.page }} de {{ paginationCtrl.pageCount() }}
+			<md-button class="md-default md-raised" ng-disabled="!paginationCtrl.hasNextPage()" ng-click="paginationCtrl.nextPage()">Próxima</md-button>
+		</div>
+	</div>
+
+	<md-button class="md-default md-raised" ng-click="listCtrl.novo()">Novo</md-button>
+</md-content>

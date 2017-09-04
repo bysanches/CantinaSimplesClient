@@ -1,0 +1,46 @@
+
+<md-content>
+	<h1>Movimentos de estoque</h1>
+	
+	
+    <div>
+        <table>
+			<thead>
+				<tr>
+                    <th>#</th>
+					<th>Data</th>
+					<th>Produto</th>
+					<th>Quantidade</th>
+					<th>Observação</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="movimento in ctrl.movimentos track by movimento.id">
+                    <td>{{ $index + 1 }}</td>
+					<td>{{ movimento.data | date:'dd/MM/yyyy HH:mm' }}</td>
+					<td>{{ movimento.produto.nome }}</td>
+					<td ng-class="ctrl.classFor(movimento.quantidade)">{{ movimento.quantidade }}</td>
+					<td>{{ movimento.observacao }}</td>
+					<td class="actions">
+                        <md-button class="md-icon-button" aria-label="excluir" ng-click="ctrl.excluir(movimento)">
+                            <md-icon>delete</md-icon>
+                        </md-button>
+                    </td>
+				</tr>
+                <tr ng-if="ctrl.movimentos.length === 0">
+                    <td colspan="6">Nenhum movimento de estoque encontrado.</td>
+                </tr>
+			</tbody>
+		</table>
+	</div>
+    
+    <div>
+        <md-button class="md-default md-raised" ng-disabled="!ctrl.paginator.hasPreviousPage()" ng-click="ctrl.paginator.previousPage()">Anterior</md-button>
+        {{ ctrl.paginator.page }} de {{ ctrl.paginator.pageCount() }}
+        <md-button class="md-default md-raised" ng-disabled="!ctrl.paginator.hasNextPage()" ng-click="ctrl.paginator.nextPage()">Próxima</md-button>
+    </div>
+	
+	<md-button class="md-raised" ng-click="ctrl.novo()">Novo</md-button>
+</md-content>

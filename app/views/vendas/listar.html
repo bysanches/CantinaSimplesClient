@@ -1,0 +1,38 @@
+<h1>Vendas</h1>
+
+
+<form name="filtroForm" ng-submit="ctrl.filtrar()">
+    <md-content layout>
+        <md-input-container flex>
+            <label>Nome do cliente</label>
+            <input ng-model="ctrl.filtro.nome">
+        </md-input-container>
+        <md-datepicker ng-model="ctrl.filtro.de" md-placeholder="De"></md-datepicker>
+        <md-datepicker ng-model="ctrl.filtro.ate" md-placeholder="Até"></md-datepicker>
+    </md-content>
+    <md-button type="submit" class="md-raised">Filtrar</md-button>
+</form>
+
+<div class="table-responsive-vertical shadow-z-1">
+    <table class="table table-hover table-mc-light-blue">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Data</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="venda in ctrl.vendas">
+                <td>{{ venda.cliente.nome }}</td>
+                <td>{{ venda.data | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ venda.total | currency:'R$' }}</td>
+            </tr>
+            <tr ng-if="ctrl.vendas.length === 0">
+                <td colspan="3">Nenhuma venda encontrada.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<strong>Total: </strong>{{ ctrl.total | currency:'R$' }}

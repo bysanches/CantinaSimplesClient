@@ -1,0 +1,112 @@
+<form name="form" ng-submit="form.$valid && ctrl.fecharVenda()" ng-cloak>
+	<div layout-padding layout="row" layout-sm="column">
+	
+        <md-autocomplete style="width: 50%"
+                         md-selected-item="ctrl.venda.cliente"
+                         md-autoselect="true"
+                         md-no-cache="true"
+                         md-search-text="ctrl.searchTextCliente"
+                         md-items="cliente in ctrl.queryClientes(ctrl.searchTextCliente)"
+                         md-item-text="cliente.nome + ' - ' + cliente.documento"
+                         md-min-length="0"
+                         md-selected-item-change="ctrl.clienteChange(cliente)"
+                         placeholder="Selecione o cliente">
+            <md-item-template>
+                <span md-highlight-text="ctrl.searchTextCliente" md-highlight-flags="^i">
+                    {{ cliente.nome + ' - ' + cliente.documento }}
+                </span>
+            </md-item-template>
+        </md-autocomplete>
+		
+		<div>
+			<md-button type="button" class="md-raised"
+			           ng-click="ctrl.venda.formaPagamento = 'dinheiro'"
+                       ng-class="{'md-primary': ctrl.venda.formaPagamento == 'dinheiro'}">dinheiro</md-button>
+			<md-button type="button" class="md-raised"
+                       ng-click="ctrl.venda.formaPagamento = 'cartao'"
+                       ng-class="{'md-primary': ctrl.venda.formaPagamento == 'cartao'}">cartão</md-button>
+			<md-button type="button" class="md-raised"
+                       ng-click="ctrl.venda.formaPagamento = 'prePago'"
+                       ng-class="{'md-primary': ctrl.venda.formaPagamento == 'prePago'}"
+                       ng-disabled="ctrl.venda.cliente == null">pré-pago</md-button>
+		</div>
+		
+	</div>
+    
+    <md-card ng-if="ctrl.venda.cliente">
+        <md-card-content>
+            <h2 class="md-title">{{ ctrl.venda.cliente.nome }}</h2>
+            <strong>Saldo: </strong>{{ ctrl.venda.cliente.saldo || 0 | currency:'R$' }}
+        </md-card-content>
+    </md-card>
+	
+	<md-autocomplete md-selected-item="ctrl.selectedProduto"
+                     md-autoselect="true"
+                     md-no-cache="true"
+					 md-search-text="ctrl.searchText"
+					 md-items="produto in ctrl.queryProdutos(ctrl.searchText)"
+					 md-item-text="produto.nome"
+					 md-selected-item-change="ctrl.selectedProdutoChange(produto)"
+					 md-min-length="0"
+					 placeholder="Selecione o produto">
+		<md-item-template>
+			<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{ produto.nome }}</span>
+		</md-item-template>
+	</md-autocomplete>
+	
+	<div class="table-responsive-vertical shadow-z-1">
+		<table class="table table-hover table-mc-light-blue">
+			<thead>
+				<tr>
+					<th class="actions">
+						<md-checkbox class="md-primary md-align-top-left"
+						             ng-if="ctrl.venda.itens.length > 0"
+									 ng-checked="ctrl.existsAll(ctrl.venda.itens, ctrl.selectedItens)"
+									 ng-click="ctrl.toggleAll(ctrl.venda.itens, ctrl.selectedItens)"
+                                     aria-label="selecionar todos"></md-checkbox>
+					</th>
+					<th>Produto</th>
+					<th>Quantidade</th>
+					<th>Valor unitário</th>
+					<th>Subtotal</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr ng-repeat="item in ctrl.venda.itens">
+					<td>
+						<md-checkbox class="md-primary md-align-top-left"
+                                     ng-checked="ctrl.exists(item, ctrl.selectedItens)"
+                                     ng-click="ctrl.toggle(item, ctrl.selectedItens)"
+                                     aria-label="selecionar item"></md-checkbox>
+					</td>
+					<td data-title="Nome">{{ item.produto.nome }}</td>
+					<td data-title="Quantidade">
+                        <ng-form name="itemForm">
+						    <md-input-container style="margin: 0;">
+                                <input type="number" required min="1"
+                                       name="quantidade"
+                                       ng-model="item.quantidade"
+                                       ng-change="ctrl.atualizarSubtotal(item)"
+                                       aria-label="quantidade">
+                                <ng-messages for="itemForm.quantidade.$error"
+                                             ng-show="itemForm.quantidade.$touched" role="alert">
+                                    <ng-message when="required">A quantidade é obrigatória.</ng-message>
+                                    <ng-message when="min">A quantidade deve ser maior ou igual a 1.</ng-message>
+                                </ng-messages>
+                            </md-input-container>
+                        </ng-form>
+					</td>
+					<td data-title="Preço">{{ item.preco | currency:'R$' }}</td>
+					<td data-title="Subtotal">{{ item.subtotal | currency:'R$' }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<md-button type="button" class="md-raised" ng-disabled="ctrl.emptySelectedItens()" ng-click="ctrl.removerItens(ctrl.selectedItens)">remover</md-button>
+	
+	<p><strong>Total</strong> {{ ctrl.venda.total | currency:'R$' }}</p>
+	
+	<md-button class="md-primary md-raised" type="submit">Fechar venda</md-button>
+</form>

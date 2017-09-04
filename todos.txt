@@ -1,0 +1,23 @@
+﻿- Perfil "Responsável" deve visualizar as recargas realizadas também. pensar num relatório que exibe de uma só vez isso;
+	
+- Venda offline (prioridade menor);
+
+- Transformar radios da tela de frente de caixa em Botões (pensando na usabilidade do Mobile);
+
+- tela de produtos não está tratando erros provenientes da API;
+
+- Colocar valor recebido no fechamento de uma venda;
+
+- Diagrama de caso de uso do estoque;
+
+- Recuperar Senha;
+
+- Criar ViewModels para serialização. Não serializar a entidade direto;
+
+- Casos de uso de restrições e recarga estão completamente diferentes;
+
+- Não foi implementado o relatório de consumo.
+
+- Caso de uso descreve edição de vendas. Remover.
+
+- Caso de uso descreve cancelamento de vendas. Não implementado.

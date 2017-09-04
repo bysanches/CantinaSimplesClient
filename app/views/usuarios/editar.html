@@ -1,0 +1,51 @@
+<h1>Edição do usuário</h1>
+
+<form name="form" novalidate ng-submit="form.$valid && ctrl.salvar()">
+    <md-content layout-padding layout layout-sm="column">
+        <md-input-container flex>
+            <label>Nome</label>
+            <input type="text" name="nome" ng-model="ctrl.usuario.firstName" required>
+            <ng-messages for="form.nome.$error" ng-show="form.nome.$submited || form.nome.$touched" role="alert">
+                <ng-message when="required">O nome é obrigatório.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container flex>
+            <label>Sobrenome</label>
+            <input name="sobrenome" ng-model="ctrl.usuario.lastName" required>
+            <ng-messages for="form.sobrenome.$error" ng-show="form.sobrenome.$submited || form.sobrenome.$touched" role="alert">
+                <ng-message when="required">O sobrenome é obrigatório.</ng-message>
+            </ng-messages>
+        </md-input-container>
+    </md-content>
+    <md-content layout-padding>
+        <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input name="email" type="email" ng-model="ctrl.usuario.email" required>
+            <ng-messages for="form.email.$error" ng-show="form.email.$submited || form.email.$touched" role="alert">
+                <ng-message when="required">O nome é obrigatório.</ng-message>
+                <ng-message when="email">E-mail inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+    </md-content>
+    <md-content layout-padding>
+        <md-input-container class="md-block">
+            <label>Perfil</label>
+            <md-select name="perfil" ng-model="ctrl.usuario.roleName" required>
+                <md-option value="Administrador">Administrador</md-option>
+                <md-option value="Gerente">Gerente</md-option>
+                <md-option value="Atendente">Atendente</md-option>
+                <md-option value="Responsavel">Responsável</md-option>
+            </md-select>
+            <ng-messages for="form.perfil.$error" ng-show="form.perfil.$submited || form.perfil.$touched" role="alert">
+                <ng-message when="required">O perfil é obrigatório.</ng-message>
+            </ng-messages>
+        </md-input-container>
+    </md-content>
+    
+    <ul style="color: red;">
+        <li ng-repeat="error in errors">{{ error }}</li>
+    </ul>
+    
+    <md-button class="md-raised md-primary" type="submit">Salvar</md-button>
+    <md-button type="button" class="md-raised" ng-click="ctrl.cancelar()">Cancelar</md-button>
+</form>

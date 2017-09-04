@@ -1,0 +1,51 @@
+<h1>Usuários</h1>
+
+<md-content>
+    <form name="filtro" novalidate ng-submit="filtro.$valid && ctrl.filtrar()">
+        <div>
+            <md-input-container class="md-block">
+                <label>E-mail</label>
+                <input name="email" type="email" ng-model="ctrl.filtro.email">
+                <ng-messages for="filtro.email.$error" ng-show="filtro.$submitted || filtro.email.$touched" role="alert">
+                    <ng-message when="email">Endereço de e-mail inválido.</ng-message>
+                </ng-messages>
+            </md-input-container>
+        </div>
+        <md-button class="md-raised" type="submit">Filtrar</md-button>
+    </form>
+</md-content>
+
+<div class="table-responsive-vertical shadow-z-1">
+    <table class="table table-hover table-mc-light-blue">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>E-mail</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="usuario in ctrl.usuarios">
+                <td>{{ usuario.firstName }}</td>
+                <td>{{ usuario.lastName }}</td>
+                <td>{{ usuario.email }}</td>
+                <td style="padding: 0; white-space: nowrap; width: 1%;">
+                    <md-button class="md-icon-button" ng-click="ctrl.editar(usuario)" aria-label="editar">
+                        <md-icon class="material-icons md-18">mode_edit</md-icon>
+                        <md-tooltip>editar</md-tooltip>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-click="ctrl.excluir(usuario)" aria-label="excluir">
+                        <md-icon class="material-icons md-18">delete</md-icon>
+                        <md-tooltip>excluir</md-tooltip>
+                    </md-button>
+                </td>
+            </tr>
+            <tr ng-if="ctrl.usuarios.length === 0">
+                <td colspan="4">Nenhum usuário encontrado.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<md-button class="md-raised" ng-click="ctrl.criar()">Novo</md-button>

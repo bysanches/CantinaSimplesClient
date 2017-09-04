@@ -1,0 +1,68 @@
+<md-content>
+	<h1>Clientes</h1>
+	
+	<form name="filtro" ng-submit="filtro.$valid && ctrl.filtrar()">
+        <div layout-padding>
+            <div layout>
+                <md-input-container flex>
+                    <label>Nome</label>
+                    <input type="text" name="nome" ng-model="ctrl.filtro.nome">
+                </md-input-container>
+                <md-input-container flex>
+                    <label>E-mail</label>
+                    <input type="email" name="email" ng-model="ctrl.filtro.email">
+                    <ng-messages for="filtro.email.$error" ng-show="filtro.$submitted || filtro.email.$touched" role="alert">
+                        <ng-message when="email">O endereço de e-mail é inválido.</ng-message>
+                    </ng-messages>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>Documento</label>
+                    <input type="text" name="documento" ng-model="ctrl.filtro.documento">
+                </md-input-container>
+            </div>
+            
+            <md-button class="md-default md-raised" type="submit">Filtrar</md-button>
+        </div>
+	</form>
+	
+    <div class="table-responsive-vertical shadow-z-1">
+        <table class="table table-hover table-mc-light-blue">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Nascimento</th>
+                    <th>Documento</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="cliente in ctrl.clientes">
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.nascimento | date:'dd/MM/yyyy' }}</td>
+                    <td>{{ cliente.documento}}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefone }}</td>
+                    <td style="padding: 0; white-space: nowrap; width: 1%;">
+                        <md-button ng-click="ctrl.editar(cliente)" class="md-icon-button" aria-label="editar">
+                            <md-icon>mode_edit</md-icon>
+                            <md-tooltip>editar</md-tooltip>
+                        </md-button>
+                        <md-button ng-click="ctrl.excluir(cliente)" class="md-icon-button" aria-label="excluir">
+                            <md-icon>delete</md-icon>
+                            <md-tooltip>excluir</md-tooltip>
+                        </md-button>
+                    </td>
+                </tr>
+                <tr ng-if="ctrl.clientes.length === 0">
+                    <td colspan="7">Nenhum cliente encontrado.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<md-button class="md-default md-raised" ng-click="ctrl.novo()">Novo cliente</md-button>
+</md-content>

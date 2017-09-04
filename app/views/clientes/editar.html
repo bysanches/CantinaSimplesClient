@@ -1,0 +1,66 @@
+<form name="form" novalidate ng-submit="form.$valid && editCtrl.salvar()">
+    <h1>{{ editCtrl.cliente.id != null ? 'Editar cliente' : 'Novo cliente' }}</h1>
+    <md-content layout-padding>
+        <md-input-container class="md-block">
+            <label>Nome</label>
+            <input type="text" name="nome" ng-model="editCtrl.cliente.nome" required>
+            <ng-messages for="form.nome.$error" ng-show="form.$submitted || form.nome.$touched" role="alert">
+                <ng-message when="required">O nome é obrigatório.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-content layout>
+            <md-datepicker ng-model="editCtrl.cliente.nascimento" md-placeholder="Nascimento" flex></md-datepicker>
+            <md-input-container flex>
+                <label>Documento</label>
+                <input type="text" name="documento" ng-model="editCtrl.cliente.documento" required>
+                <ng-messages for="form.documento.$error" ng-show="form.$submitted || form.documento.$touched" role="alert">
+                    <ng-message when="required">O documento é obrigatório.</ng-message>
+                </ng-messages>
+            </md-input-container>
+        </md-content>
+        <md-input-container class="md-block">
+            <label>E-mail</label>
+            <input type="email" name="email" ng-model="editCtrl.cliente.email">
+            <ng-messages for="form.email.$error" ng-show="form.$submitted || form.email.$touched" role="alert">
+                <ng-message when="email">O endereço de e-mail é inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Telefone</label>
+            <input type="text" name="telefone" ng-model="editCtrl.cliente.telefone" pattern="(\(\d{2}\) ?)?\d{4,5}-\d{4}" mask="(99) 9?9999-9999">
+            <ng-messages for="form.telefone.$error" ng-show="form.$submitted || form.telefone.$touched" role="alert">
+                <ng-message when="pattern">Telefone inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Nome do responsável</label>
+            <input type="text" name="nomeResponsavel" ng-model="editCtrl.cliente.nomeResponsavel">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Telefone do responsável</label>
+            <input type="text" name="telefoneResponsavel" ng-model="editCtrl.cliente.telefoneResponsavel" pattern="(\(\d{2}\) ?)?\d{4,5}-\d{4}"
+            mask="(99) 9?9999-9999">
+            <ng-messages for="form.telefone.$error" ng-show="form.$submitted || form.telefoneResponsavel.$touched"
+            role="alert">
+                <ng-message when="pattern">Telefone inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>E-mail do responsável</label>
+            <input type="email" name="emailResponsavel" ng-model="editCtrl.cliente.emailResponsavel">
+            <ng-messages for="form.emailResponsavel.$error" ng-show="form.$submitted || form.emailResponsavel.$touched"
+            role="alert">
+                <ng-message when="email">O endereço de e-mail é inválido.</ng-message>
+            </ng-messages>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Usuário responsável</label>
+            <md-select ng-model="editCtrl.cliente.idResponsavel">
+                <md-option>-- selecione --</md-option>
+                <md-option ng-repeat="usuario in editCtrl.usuarios" ng-value="usuario.id">{{ usuario.fullName }}</md-option>
+            </md-select>
+        </md-input-container>
+        <md-button class="md-raised md-primary" type="submit">Salvar</md-button>
+        <md-button class="md-raised md-default" type="button" ng-click="editCtrl.cancelar()">Cancelar</md-button>
+    </md-content>
+</form>
