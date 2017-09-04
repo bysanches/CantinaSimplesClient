@@ -1,6 +1,6 @@
 # CantinaSimplesClient
 
-Cantina Simples foi um projeto desenvolvido como trabalho de conclusão de curso de engenharia de computação. É um software de controle de cantinas escolares.
+Cantina Simples foi um projeto desenvolvido como trabalho de conclusão de curso de engenharia de computação, entregue no final de 2015. É um software de controle de cantinas escolares.
 
 ## Autores
 
